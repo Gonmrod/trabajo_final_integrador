@@ -91,6 +91,34 @@ cuadro_rubro.config(yscrollcommand=scroll_bar.set) #Esto sirve para saber donde 
 
 #3) Creación de labels (Etiquetas)
 
+id_label=Label(frame_superior, text="Id:")
+id_label.grid(row=0, column=0, sticky="e", padx=10, pady=10)
 
+nombre_label=Label(frame_superior, text="Nombre:")
+nombre_label.grid(row=1, column=0, sticky="e", padx=10, pady=10)
+
+apellido_label=Label(frame_superior, text="Apellido:")
+apellido_label.grid(row=2, column=0, sticky="e", padx=10, pady=10)
+
+cuit_label=Label(frame_superior, text="CUIL/CUIT:")
+cuit_label.grid(row=3, column=0, sticky="e", padx=10, pady=10)
+
+dom_part_label=Label(frame_superior, text="Domicilio Particular:")
+dom_part_label.grid(row=4, column=0, sticky="e", padx=10, pady=10)
+
+dom_com_label=Label(frame_superior, text="Domicilio Comercial:")
+dom_com_label.grid(row=5, column=0, sticky="e", padx=10, pady=10)
+
+expte_label=Label(frame_superior, text="N° de Expediente:")
+expte_label.grid(row=6, column=0, sticky="e", padx=10, pady=10)
+
+cuenta_label=Label(frame_superior, text="N° de Cuenta:")
+cuenta_label.grid(row=7, column=0, sticky="e", padx=10, pady=10)
+
+tipo_tramite_label=Label(frame_superior, text="Tipo de Trámite:")
+tipo_tramite_label.grid(row=8, column=0, sticky="e", padx=10, pady=10)
+
+rubro_label=Label(frame_superior, text="Rubro:")
+rubro_label.grid(row=9, column=0, sticky="e", padx=10, pady=10)
 
 root.mainloop()
