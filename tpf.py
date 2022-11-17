@@ -9,7 +9,7 @@ root=Tk()
 barra_menu=Menu(root) #-->Variable
 root.config(menu=barra_menu, width= 300, height=300)
 
-#1.a) Base de datos
+#1.a) Menú para Base de datos
 bbdd_menu=Menu(barra_menu, tearoff=0) #tearoff=etiqueta para lineas
 bbdd_menu.add_command(label="Conectar") #-->Instrucción para conectar a la bbdd
 bbdd_menu.add_command(label="Salir")
@@ -120,5 +120,28 @@ tipo_tramite_label.grid(row=8, column=0, sticky="e", padx=10, pady=10)
 
 rubro_label=Label(frame_superior, text="Rubro:")
 rubro_label.grid(row=9, column=0, sticky="e", padx=10, pady=10)
+
+#--------------------------------------------------------------#
+
+#4) Creación de Botones
+
+frame_inferior=Frame(root)
+frame_inferior.pack()
+
+boton_crear=Button(frame_inferior, text="Crear")
+boton_crear.grid(row=1, column=0, sticky="e", padx=10, pady=10)
+
+boton_leer=Button(frame_inferior, text="Leer")
+boton_leer.grid(row=1, column=1, sticky="e", padx=10, pady=10)
+
+boton_actualizar=Button(frame_inferior, text="Actualizar")
+boton_actualizar.grid(row=1, column=2, sticky="e", padx=10, pady=10)
+
+boton_borrar=Button(frame_inferior, text="Borrar")
+boton_borrar.grid(row=1, column=3, sticky="e", padx=10, pady=10)
+
+#----------------------------------------------------------------#
+
+#5) Creación de Base de datos
 
 root.mainloop()
