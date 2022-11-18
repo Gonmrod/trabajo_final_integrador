@@ -143,5 +143,5 @@ boton_borrar.grid(row=1, column=3, sticky="e", padx=10, pady=10)
 #----------------------------------------------------------------#
 
 #5) Creación de Base de datos
-
+#
 root.mainloop()
