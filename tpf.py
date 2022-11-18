@@ -1,6 +1,31 @@
 from tkinter import * #--> Lo importé para realizar la gráfica
 from tkinter import messagebox #--> Para mensajes emergentes.
 import sqlite3 #--> Para conectar con base de datos.
+#Alumno: Rodriguez, Gonzalo Martín -
+#Profesor: Morales, Felipe -
+#Com--06
+
+#Índice
+#0) Funciones 
+#1) Menu superior
+#--------1.a) Menú para Base de datos
+#--------1.b) Menú para borrar campos
+#--------1.c) CRUD
+#--------1.d) Ayuda
+#2)Cuadro intermedio con campos para carga de datos
+#3) Creación de labels (Etiquetas)
+#4) Creación de Botones
+#5) Creación de Base de datos
+
+#0) Funciones
+
+def conexionBBDD():
+    conexion_bbdd=sqlite3.connect("Usuarios") #instrucción para conectar con base de datos
+    mi_cursor=conexion_bbdd.cursor() #El cursor, ss un objeto que se utiliza para realizar la conexión para ejecutar consultas SQL. Actúa como middleware entre la conexión de la base de datos SQLite y la consulta SQL. Se crea después de dar conexión a la base de datos SQLite.
+    mi_cursor.execute('''
+        CREATE TABLE  datos_usuarios
+        ID INTEGER PRIMARY KEY AUTOINCREMENT,
+        )''')
 
 root=Tk()
 
@@ -14,7 +39,7 @@ bbdd_menu=Menu(barra_menu, tearoff=0) #tearoff=etiqueta para lineas
 bbdd_menu.add_command(label="Conectar") #-->Instrucción para conectar a la bbdd
 bbdd_menu.add_command(label="Salir")
 
-#1.b) Borrar campos
+#1.b) Menú para Borrar campos
 borrar_menu=Menu(barra_menu, tearoff=0)
 borrar_menu.add_command(label="Borrar campos")
 
@@ -143,5 +168,5 @@ boton_borrar.grid(row=1, column=3, sticky="e", padx=10, pady=10)
 #----------------------------------------------------------------#
 
 #5) Creación de Base de datos
-#
+
 root.mainloop()
