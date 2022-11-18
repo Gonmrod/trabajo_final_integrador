@@ -1,6 +1,7 @@
 from tkinter import * #--> Lo importé para realizar la gráfica
 from tkinter import messagebox #--> Para mensajes emergentes.
 import sqlite3 #--> Para conectar con base de datos.
+
 #Alumno: Rodriguez, Gonzalo Martín -
 #Profesor: Morales, Felipe -
 #Com--06
@@ -20,12 +21,29 @@ import sqlite3 #--> Para conectar con base de datos.
 #0) Funciones
 
 def conexionBBDD():
-    conexion_bbdd=sqlite3.connect("Usuarios") #instrucción para conectar con base de datos
-    mi_cursor=conexion_bbdd.cursor() #El cursor, ss un objeto que se utiliza para realizar la conexión para ejecutar consultas SQL. Actúa como middleware entre la conexión de la base de datos SQLite y la consulta SQL. Se crea después de dar conexión a la base de datos SQLite.
-    mi_cursor.execute('''
-        CREATE TABLE  datos_usuarios
-        ID INTEGER PRIMARY KEY AUTOINCREMENT,
-        )''')
+    #Función para conectar con base de datos
+    conn_bbdd=sqlite3.connect('Usuarios.db') 
+    #El cursor, es un objeto que se utiliza para realizar la conexión para ejecutar consultas SQL. Actúa como middleware entre la conexión de la base de datos SQLite y la consulta SQL. Se crea después de dar conexión a la base de datos SQLite.
+   #Acontinuación, creo la tabla y establezco instrucciones a cada casillero.
+    mi_cursor=conn_bbdd.cursor() 
+    try:
+        mi_cursor.execute("""CREATE TABLE DATOS_USUARIOS (
+            ID INTEGER PRIMARY KEY AUTOINCREMENT, 
+            NOMBRE_USUARIO VARCHAR(30), 
+            APELLIDO_USUARIO VARCHAR(30), 
+            CUIT_USUARIO VARCHAR(15), 
+            DOMPART_USUARIO VARCHAR(50), 
+            DOMCOM_USUARIO VARCHAR(50), 
+            EXPTE_USUARIO VARCHAR(40), 
+            CUENTA_USUARIO VARCHAR(10), 
+            TRAMITE_USUARIO VARCHAR(30), 
+            RUBRO_USUARIO VARCHAR(50))
+        """)
+        messagebox.showinfo("BBDD", "BBDD creada con éxito.")
+    except:
+        messagebox.showwarning("¡Atención!", "La BBDD ya existe.")
+
+#https://www.youtube.com/watch?v=5XPLCDp7nDk&t=275s
 
 root=Tk()
 
@@ -36,7 +54,7 @@ root.config(menu=barra_menu, width= 300, height=300)
 
 #1.a) Menú para Base de datos
 bbdd_menu=Menu(barra_menu, tearoff=0) #tearoff=etiqueta para lineas
-bbdd_menu.add_command(label="Conectar") #-->Instrucción para conectar a la bbdd
+bbdd_menu.add_command(label="Conectar", command=conexionBBDD) #-->Instrucción para conectar a la bbdd
 bbdd_menu.add_command(label="Salir")
 
 #1.b) Menú para Borrar campos
