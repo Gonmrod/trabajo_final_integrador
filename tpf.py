@@ -60,6 +60,56 @@ def borrar_campos(): #Resetea los campos
     mi_tramite.set("")
     cuadro_rubro.delete(1.0, END) #El 1.0 cuenta como punto de partida, y el END, hasta el final.
 
+def crear():
+    mi_conexion=sqlite3.connect("Usuarios.db")
+    mi_cursor=mi_conexion.cursor()
+    mi_cursor.execute("INSERT INTO DATOS_USUARIOS VALUES(NULL,'" + mi_nombre.get() + 
+        "','" + mi_apellido.get() +
+        "','" + mi_cuit.get() +
+        "','" + mi_dom_part.get() +
+        "','" + mi_dom_com.get() +
+        "','" + mi_expte.get() +
+        "','" + mi_cuenta.get() +
+        "','" + mi_tramite.get() +
+        "','" + cuadro_rubro.get("1.0", END) + "')")
+    mi_conexion.commit()
+    messagebox.showinfo("BBDD", "Registro ingresado con éxito.")
+def leer():
+    mi_conexion=sqlite3.connect("Usuarios.db")
+    mi_cursor=mi_conexion.cursor()
+    mi_cursor.execute("SELECT * FROM DATOS_USUARIOS WHERE ID=" + mi_id.get())
+    los_usuarios=mi_cursor.fetchall()
+
+    for usuario in los_usuarios:
+        mi_id.set(usuario[0])
+        mi_nombre.set(usuario[1])
+        mi_apellido.set(usuario[2])
+        mi_cuit.set(usuario[3])
+        mi_dom_part.set(usuario[4])
+        mi_dom_com.set(usuario[5])
+        mi_expte.set(usuario[6])
+        mi_cuenta.set(usuario[7])
+        mi_tramite.set(usuario[8])
+        cuadro_rubro.insert("1.0", usuario[9])
+    
+    mi_conexion.commit()
+
+def actualizar():
+    mi_conexion=sqlite3.connect("Usuarios.db")
+    mi_cursor=mi_conexion.cursor()
+    mi_cursor.execute("UPDATE DATOS_USUARIOS SET NOMBRE_USUARIO='" + mi_nombre.get() + 
+    "', APELLIDO_USUARIO='" + mi_apellido.get()+
+    "', CUIT_USUARIO='" + mi_cuit.get()+
+    "', DOMPART_USUARIO='" + mi_dom_part.get()+
+    "', DOMCOM_USUARIO='" + mi_dom_com.get()+
+    "', EXPTE_USUARIO='" + mi_expte.get()+
+    "', CUENTA_USUARIO='" + mi_cuenta.get()+
+    "', TRAMITE_USUARIO='" + mi_tramite.get()+
+    "', RUBRO_USUARIO='" + cuadro_rubro.get("1.0", END) +
+    "' WHERE ID=" + mi_id.get())
+    mi_conexion.commit()
+    messagebox.showinfo("BBDD", "Registro actualizado con éxito.")
+
 root=Tk()
 
 #1) Menu superior
@@ -78,9 +128,9 @@ borrar_menu.add_command(label="Borrar campos", command=borrar_campos)
 
 #1.c) Creaciónd de CRUD (Creat, Read, Update, Delete), para operar sobre info. almacenada.
 crud_menu=Menu(barra_menu, tearoff=0)
-crud_menu.add_command(label="Crear")
-crud_menu.add_command(label="Leer")
-crud_menu.add_command(label="Actualizar")
+crud_menu.add_command(label="Crear", command=crear)
+crud_menu.add_command(label="Leer", command=leer)
+crud_menu.add_command(label="Actualizar", command=actualizar)
 crud_menu.add_command(label="Borrar")
 
 #1.d) Ayuda
@@ -195,13 +245,13 @@ rubro_label.grid(row=9, column=0, sticky="e", padx=10, pady=10)
 frame_inferior=Frame(root)
 frame_inferior.pack()
 
-boton_crear=Button(frame_inferior, text="Crear")
+boton_crear=Button(frame_inferior, text="Crear", command=crear)
 boton_crear.grid(row=1, column=0, sticky="e", padx=10, pady=10)
 
-boton_leer=Button(frame_inferior, text="Leer")
+boton_leer=Button(frame_inferior, text="Leer", command=leer)
 boton_leer.grid(row=1, column=1, sticky="e", padx=10, pady=10)
 
-boton_actualizar=Button(frame_inferior, text="Actualizar")
+boton_actualizar=Button(frame_inferior, text="Actualizar", command=actualizar)
 boton_actualizar.grid(row=1, column=2, sticky="e", padx=10, pady=10)
 
 boton_borrar=Button(frame_inferior, text="Borrar")
