@@ -43,7 +43,22 @@ def conexionBBDD():
     except:
         messagebox.showwarning("¡Atención!", "La BBDD ya existe.")
 
-#https://www.youtube.com/watch?v=5XPLCDp7nDk&t=275s
+def salir_app():
+    valor=messagebox.askquestion("Salir", "¿Deséas salir de la aplicación?")
+    if valor=="yes":
+        root.destroy()
+
+def borrar_campos(): #Resetea los campos
+    mi_id.set("")
+    mi_nombre.set("")
+    mi_apellido.set("")
+    mi_cuit.set("")
+    mi_dom_part.set("")
+    mi_dom_com.set("")
+    mi_expte.set("")
+    mi_cuenta.set("")
+    mi_tramite.set("")
+    cuadro_rubro.delete(1.0, END) #El 1.0 cuenta como punto de partida, y el END, hasta el final.
 
 root=Tk()
 
@@ -55,11 +70,11 @@ root.config(menu=barra_menu, width= 300, height=300)
 #1.a) Menú para Base de datos
 bbdd_menu=Menu(barra_menu, tearoff=0) #tearoff=etiqueta para lineas
 bbdd_menu.add_command(label="Conectar", command=conexionBBDD) #-->Instrucción para conectar a la bbdd
-bbdd_menu.add_command(label="Salir")
+bbdd_menu.add_command(label="Salir", command=salir_app)
 
 #1.b) Menú para Borrar campos
 borrar_menu=Menu(barra_menu, tearoff=0)
-borrar_menu.add_command(label="Borrar campos")
+borrar_menu.add_command(label="Borrar campos", command=borrar_campos)
 
 #1.c) Creaciónd de CRUD (Creat, Read, Update, Delete), para operar sobre info. almacenada.
 crud_menu=Menu(barra_menu, tearoff=0)
@@ -86,41 +101,50 @@ barra_menu.add_cascade(label="Ayuda", menu=ayuda_menu)
 
 frame_superior=Frame(root)
 frame_superior.pack() #---> para empaquetar "es un tipo de posicionamiento para los widgets que ajusta todo los elementos acomodándolos entre sí, para luego hacer la ventana raíz tan grande para contener todos estos elementos"
+mi_id=StringVar()
+mi_nombre=StringVar()
+mi_apellido=StringVar()
+mi_cuit=StringVar()
+mi_dom_part=StringVar()
+mi_dom_com=StringVar()
+mi_expte=StringVar()
+mi_cuenta=StringVar()
+mi_tramite=StringVar()
 
 #2.a) Creación de cuadros de textos (entry)
-cuadro_id=Entry(frame_superior)
+cuadro_id=Entry(frame_superior, textvariable=mi_id)
 cuadro_id.grid(row=0, column=1, padx=10, pady=10) #Se establece la posición que ocuparán
 cuadro_id.config(foreground="red", justify="left")
 
-cuadro_nombre=Entry(frame_superior)
+cuadro_nombre=Entry(frame_superior, textvariable=mi_nombre)
 cuadro_nombre.grid(row=1, column=1, padx=10, pady=10)
 cuadro_nombre.config(foreground="red", justify="left")
 
-cuadro_apellido=Entry(frame_superior)
+cuadro_apellido=Entry(frame_superior, textvariable=mi_apellido)
 cuadro_apellido.grid(row=2, column=1, padx=10, pady=10)
 cuadro_apellido.config(foreground="red", justify="left")
 
-cuadro_cuit=Entry(frame_superior)
+cuadro_cuit=Entry(frame_superior, textvariable=mi_cuit)
 cuadro_cuit.grid(row=3, column=1, padx=10, pady=10)
 cuadro_cuit.config(foreground="red", justify="left")
 
-cuadro_dom_part=Entry(frame_superior)
+cuadro_dom_part=Entry(frame_superior, textvariable=mi_dom_part)
 cuadro_dom_part.grid(row=4, column=1, padx=10, pady=10)
 cuadro_dom_part.config(justify="left")
 
-cuadro_dom_com=Entry(frame_superior)
+cuadro_dom_com=Entry(frame_superior, textvariable=mi_dom_com)
 cuadro_dom_com.grid(row=5, column=1, padx=10, pady=10)
 cuadro_dom_com.config(justify="left")
 
-cuadro_expte=Entry(frame_superior)
+cuadro_expte=Entry(frame_superior, textvariable=mi_expte)
 cuadro_expte.grid(row=6, column=1, padx=10, pady=10)
 cuadro_expte.config( justify="left")
 
-cuadro_cuenta=Entry(frame_superior)
+cuadro_cuenta=Entry(frame_superior, textvariable=mi_cuenta)
 cuadro_cuenta.grid(row=7, column=1, padx=10, pady=10)
 cuadro_cuenta.config(justify="left")
 
-cuadro_tipo_tramite=Entry(frame_superior)
+cuadro_tipo_tramite=Entry(frame_superior, textvariable=mi_tramite)
 cuadro_tipo_tramite.grid(row=8, column=1, padx=10, pady=10)
 cuadro_tipo_tramite.config(justify="left")
 
