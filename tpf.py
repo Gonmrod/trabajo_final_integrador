@@ -110,6 +110,18 @@ def actualizar():
     mi_conexion.commit()
     messagebox.showinfo("BBDD", "Registro actualizado con éxito.")
 
+def borrar():
+    mi_conexion=sqlite3.connect("Usuarios.db")
+    mi_cursor=mi_conexion.cursor()
+    mi_cursor.execute("DELETE FROM DATOS_USUARIOS WHERE ID=" + mi_id.get())
+    mi_conexion.commit()
+    messagebox.showinfo("BBDD", "Registro eliminado con éxito.")
+
+def contacto():
+    messagebox.showinfo("CONTACTO", "Por dudas o sugerencias escribir a gonzalo.marodriguez@gmail.com")
+
+def acerca():
+    messagebox.showinfo("Acerca de...", "Programa creado para TFI Prof. Felipe Morales - Com. 06 // Autor: Gonzalo Rodriguez")
 root=Tk()
 
 #1) Menu superior
@@ -131,12 +143,12 @@ crud_menu=Menu(barra_menu, tearoff=0)
 crud_menu.add_command(label="Crear", command=crear)
 crud_menu.add_command(label="Leer", command=leer)
 crud_menu.add_command(label="Actualizar", command=actualizar)
-crud_menu.add_command(label="Borrar")
+crud_menu.add_command(label="Borrar", command=borrar)
 
 #1.d) Ayuda
 ayuda_menu=Menu(barra_menu, tearoff=0)
-ayuda_menu.add_command(label="Contacto")
-ayuda_menu.add_command(label="Acerca de...")
+ayuda_menu.add_command(label="Contacto", command=contacto)
+ayuda_menu.add_command(label="Acerca de...", command=acerca)
 
 #Agregamos las opciones a la barra de menú, es decir especificamos que pertenece todo lo
 #lo anterior a la barra de menú.
@@ -254,7 +266,7 @@ boton_leer.grid(row=1, column=1, sticky="e", padx=10, pady=10)
 boton_actualizar=Button(frame_inferior, text="Actualizar", command=actualizar)
 boton_actualizar.grid(row=1, column=2, sticky="e", padx=10, pady=10)
 
-boton_borrar=Button(frame_inferior, text="Borrar")
+boton_borrar=Button(frame_inferior, text="Borrar", command=borrar)
 boton_borrar.grid(row=1, column=3, sticky="e", padx=10, pady=10)
 
 #----------------------------------------------------------------#
