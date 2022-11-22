@@ -12,17 +12,17 @@ import pandas as pd
 #Com--06
 
 #Índice
-#0) Funciones 
-#1) Menu superior
-#--------1.a) Menú para Base de datos
-#--------1.b) Menú para borrar campos
-#--------1.c) CRUD
-#--------1.e) Exportar a .xls
-#--------1.d) Ayuda
-#2) Cuadro intermedio con campos para carga de datos
-#3) Creación de labels (Etiquetas)
-#4) Creación de Botones
-#5) Creación de Base de datos
+#0) Funciones --> Desde líneas 27 hasta 140.
+#1) Menu superior --> Desde línea 144 hasta 180.
+#--------1.a) Menú para Base de datos --> Desde línea 149.
+#--------1.b) Menú para borrar campos --> Desde línea 154.
+#--------1.c) CRUD --> Desde línea 158.
+#--------1.e) Exportar a .xls --> Desde línea 165.
+#--------1.d) Ayuda --> Desde línea 169.
+#2) Cuadro intermedio con campos para carga de datos y Entry--> Desde línea 184 hasta 239.
+#3) Creación de labels (Etiquetas) --> Desde línea 243 hasta 273.
+#4) Creación de Botones --> Desde línea 277 hasta 292.
+
 
 #0) Funciones
 
@@ -293,6 +293,6 @@ boton_borrar.grid(row=1, column=3, sticky="e", padx=10, pady=10)
 
 #----------------------------------------------------------------#
 
-#5) Creación de Base de datos
+
 root.resizable(False, False)
 root.mainloop()
