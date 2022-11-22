@@ -1,6 +1,11 @@
 from tkinter import * #--> Lo importé para realizar la gráfica
 from tkinter import messagebox #--> Para mensajes emergentes.
 import sqlite3 #--> Para conectar con base de datos.
+from pandas import *
+import pandas as pd
+
+
+
 
 #Alumno: Rodriguez, Gonzalo Martín -
 #Profesor: Morales, Felipe -
@@ -12,8 +17,9 @@ import sqlite3 #--> Para conectar con base de datos.
 #--------1.a) Menú para Base de datos
 #--------1.b) Menú para borrar campos
 #--------1.c) CRUD
+#--------1.e) Exportar a .xls
 #--------1.d) Ayuda
-#2)Cuadro intermedio con campos para carga de datos
+#2) Cuadro intermedio con campos para carga de datos
 #3) Creación de labels (Etiquetas)
 #4) Creación de Botones
 #5) Creación de Base de datos
@@ -125,6 +131,14 @@ def contacto():
 
 def acerca():
     messagebox.showinfo("Acerca de...", "Programa creado para TFI Prof. Felipe Morales - Com. 06 // Autor: Gonzalo Rodriguez")
+
+def exportar():
+    mi_conexion=sqlite3.connect("Usuarios.db")
+    datos = pd.read_sql("SELECT * FROM DATOS_USUARIOS", mi_conexion)
+    df= pd.DataFrame(datos)
+    df.to_excel((f'Datos.xlsx'))
+    messagebox.showinfo('Información', 'Datos exportados con éxito.') 
+    
 root=Tk()
 
 #1) Menu superior
@@ -148,7 +162,11 @@ crud_menu.add_command(label="Leer", command=leer)
 crud_menu.add_command(label="Actualizar", command=actualizar)
 crud_menu.add_command(label="Borrar", command=borrar)
 
-#1.d) Ayuda
+#1.d) Exportar a xls
+exportar_menu=Menu(barra_menu, tearoff=0)
+exportar_menu.add_command(label="Exportar BBDD a .xls", command=exportar)
+
+#1.e) Ayuda
 ayuda_menu=Menu(barra_menu, tearoff=0)
 ayuda_menu.add_command(label="Contacto", command=contacto)
 ayuda_menu.add_command(label="Acerca de...", command=acerca)
@@ -158,6 +176,7 @@ ayuda_menu.add_command(label="Acerca de...", command=acerca)
 barra_menu.add_cascade(label="BBDD", menu=bbdd_menu)
 barra_menu.add_cascade(label="Borrar", menu=borrar_menu)
 barra_menu.add_cascade(label="CRUD", menu=crud_menu)
+barra_menu.add_cascade(label="Exportar", menu=exportar_menu)
 barra_menu.add_cascade(label="Ayuda", menu=ayuda_menu)
 
 #-------------------------------------------------------#
