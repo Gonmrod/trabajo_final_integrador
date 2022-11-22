@@ -77,7 +77,10 @@ def crear():
 def leer():
     mi_conexion=sqlite3.connect("Usuarios.db")
     mi_cursor=mi_conexion.cursor()
-    mi_cursor.execute("SELECT * FROM DATOS_USUARIOS WHERE ID=" + mi_id.get())
+    id=0
+    if mi_id.get() != "" and mi_id.get()!=None:
+        id=mi_id.get()
+    mi_cursor.execute("SELECT * FROM DATOS_USUARIOS WHERE ID=" + str(id) + " OR CUIT_USUARIO='" + mi_cuit.get() + "' OR EXPTE_USUARIO='" + mi_expte.get() + "' OR CUENTA_USUARIO='" + mi_cuenta.get()+ "'")
     los_usuarios=mi_cursor.fetchall()
 
     for usuario in los_usuarios:
@@ -272,5 +275,5 @@ boton_borrar.grid(row=1, column=3, sticky="e", padx=10, pady=10)
 #----------------------------------------------------------------#
 
 #5) Creación de Base de datos
-
+root.resizable(False, False)
 root.mainloop()
